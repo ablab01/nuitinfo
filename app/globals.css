@@ -31,7 +31,7 @@
 @layer base {
   body {
     min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-montserrat), sans-serif;
     color: var(--foreground);
 
     background:
@@ -44,11 +44,6 @@
     animation: moveBackground 10s ease-in-out infinite alternate;
   }
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-montserrat), sans-serif;
 
 @keyframes moveBackground {
   0% {
@@ -71,6 +66,5 @@ body {
       90% 10%,
       15% 100%,
       85% 70%;
-  }
   }
 }
