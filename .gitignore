@@ -1,0 +1,34 @@
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# --- Node.js ---
+node_modules/
+dist/
+build/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+
+# --- VSCode ---
+.vscode/
+.history/
+
+# --- Env Files / Secrets ---
+*.env
+.env.local
+.env.*.local
+
+# --- Misc ---
+*.swp
+*.tmp
