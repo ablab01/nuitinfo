@@ -3,6 +3,20 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --green: #1d6517;
+  --darkgreen: #054204;
+  --softgreen: #79b425;
+  --lightgreen: #c0de7b;
+  --blue: #55a6c3;
+  --color-text: #222222;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 @theme inline {
@@ -12,15 +26,46 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+
+@layer base {
+  body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--foreground);
+
+    background:
+      radial-gradient(circle at 0% 0%, var(--softgreen), transparent 55%),
+      radial-gradient(circle at 100% 0%, var(--blue), transparent 55%),
+      radial-gradient(circle at 0% 100%, var(--lightgreen), transparent 55%),
+      radial-gradient(circle at 100% 100%, var(--green), var(--darkgreen));
+
+    background-size: 200% 200%;
+    animation: moveBackground 10s ease-in-out infinite alternate;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+@keyframes moveBackground {
+  0% {
+    background-position:
+      0% 0%,
+      100% 0%,
+      0% 100%,
+      100% 100%;
+  }
+  50% {
+    background-position:
+      25% 15%,
+      75% 10%,
+      10% 80%,
+      90% 85%;
+  }
+  100% {
+    background-position:
+      10% 25%,
+      90% 10%,
+      15% 100%,
+      85% 70%;
+  }
 }
+
