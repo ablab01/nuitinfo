@@ -73,6 +73,21 @@ export default function Home() {
   return (
     <>
       <Navbar />
+      <style jsx>{`
+        @keyframes blinkLight {
+          0%, 100% {
+            opacity: 0.3;
+            box-shadow: 0 0 5px 1px rgba(250, 204, 21, 0.5);
+          }
+          50% {
+            opacity: 1;
+            box-shadow: 0 0 20px 5px rgba(250, 204, 21, 1);
+          }
+        }
+        .light-point {
+          animation: blinkLight 1s ease-in-out infinite;
+        }
+      `}</style>
       <main className="flex min-h-screen flex-col items-center justify-center p-24 gap-8">
         <h1 className="text-4xl font-bold text-[var(--lightgreen)]">NIRD</h1>
         
@@ -87,10 +102,11 @@ export default function Home() {
             return (
               <div
                 key={index}
-                className="absolute w-3 h-3 rounded-full bg-yellow-400 pointer-events-none animate-blink"
+                className="absolute w-3 h-3 rounded-full pointer-events-none light-point"
                 style={{
                   left: '50%',
                   top: '50%',
+                  backgroundColor: 'rgb(250, 204, 21)',
                   transform: `translate(${x}px, ${y}px) translate(-50%, -50%)`,
                   animationDelay: `${(index * 1000) / numberOfLights}ms`,
                 }}

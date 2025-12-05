@@ -1,17 +1,97 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Navbar from "@/components/ui/navbar";
 import "./contact.css";
 import { RetroGrid } from "@/components/ui/retro-grid";
 import { Button } from "@/components/ui/button";
+import confetti from "canvas-confetti";
 
 export default function Contact() {
   const [showForm, setShowForm] = useState(false);
+  const [message, setMessage] = useState("");
+  
+  // États pour la roue
+  const [rotation, setRotation] = useState(0);
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [selectedLetter, setSelectedLetter] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const wheelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 26 lettres dans le sens anti-horaire depuis le haut
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+  const degreesPerLetter = 360 / 26;
+  const numberOfLights = 24;
+
+  const spinWheel = () => {
+    if (isSpinning) return;
+    
+    setIsSpinning(true);
+    setSelectedLetter(null);
+    
+    const casinoAudio = new Audio('/casino.mp3');
+    casinoAudio.play().catch(err => console.log('Erreur audio casino:', err));
+    
+    const randomDegrees = Math.floor(Math.random() * (300 - 60 + 1)) + 60;
+    const newRotation = rotation + randomDegrees + 360 * 3;
+    
+    setRotation(newRotation);
+    
+    setTimeout(() => {
+      setIsSpinning(false);
+      
+      const normalizedAngle = newRotation % 360 + degreesPerLetter / 2;
+      const letterIndex = Math.floor(normalizedAngle / degreesPerLetter) % 26;
+      
+      const finalLetter = letters[letterIndex];
+      setSelectedLetter(finalLetter);
+      
+      // Ajouter la lettre au message (majuscule si c'est la première lettre)
+      setMessage(prev => {
+        const trimmedPrev = prev.trim();
+        const letterToAdd = trimmedPrev.length === 0 ? finalLetter : finalLetter.toLowerCase();
+        return prev + letterToAdd;
+      });
+      
+      if (mounted && wheelRef.current) {
+        const rect = wheelRef.current.getBoundingClientRect();
+        const x = (rect.left + rect.width / 2) / window.innerWidth;
+        const y = (rect.top + rect.height / 2) / window.innerHeight;
+        
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { x, y }
+        });
+      }
+      
+      const audio = new Audio('/whoosh.mp3');
+      audio.play().catch(err => console.log('Erreur audio:', err));
+    }, 3000);
+  };
 
   return (
     <div className="contactContainer">
+      <style jsx>{`
+        @keyframes blinkLight {
+          0%, 100% {
+            opacity: 0.3;
+            box-shadow: 0 0 5px 1px rgba(250, 204, 21, 0.5);
+          }
+          50% {
+            opacity: 1;
+            box-shadow: 0 0 20px 5px rgba(250, 204, 21, 1);
+          }
+        }
+        .light-point {
+          animation: blinkLight 1s ease-in-out infinite;
+        }
+      `}</style>
       <div className="navbarWrapper">
         <Navbar />
       </div>
@@ -71,44 +151,146 @@ export default function Contact() {
         </div>
 
         {showForm && (
-          <form className="retroForm">
-            <h2 className="retroFormTitle">Formulaire secret 💾</h2>
+          <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+            <form className="retroForm" style={{ flex: '1', maxWidth: '600px' }}>
+              <h2 className="retroFormTitle">Formulaire secret 💾</h2>
 
-            <div className="retroFormRow">
+              <div className="retroFormRow">
+                <label className="retroLabel">
+                  Nom
+                  <input
+                    type="text"
+                    className="retroInput"
+                    placeholder="Ton pseudo / ton nom"
+                  />
+                </label>
+
+                <label className="retroLabel">
+                  Email
+                  <input
+                    type="email"
+                    className="retroInput"
+                    placeholder="toi@exemple.com"
+                  />
+                </label>
+              </div>
               <label className="retroLabel">
-                Nom
-                <input
-                  type="text"
-                  className="retroInput"
-                  placeholder="Ton pseudo / ton nom"
+                Message
+                <textarea
+                  className="retroTextarea"
+                  rows={4}
+                  placeholder="Balance toutes tes idées ici en utilisant la roue (tu peux mettre des espaces ou effacer des caractères)🔥"
+                  value={message}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    const lastChar = newValue[newValue.length - 1];
+                    
+                    // Autoriser la suppression (newValue plus court que message)
+                    if (newValue.length < message.length) {
+                      setMessage(newValue);
+                    }
+                    // Autoriser uniquement les espaces
+                    else if (lastChar === ' ') {
+                      setMessage(newValue);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    // Bloquer toutes les touches sauf Backspace, Delete et Espace
+                    if (e.key !== 'Backspace' && e.key !== 'Delete' && e.key !== ' ') {
+                      e.preventDefault();
+                    }
+                  }}
                 />
               </label>
 
-              <label className="retroLabel">
-                Email
-                <input
-                  type="email"
-                  className="retroInput"
-                  placeholder="toi@exemple.com"
+              <div className="retroFormActions">
+                <Button type="submit" className="retroButton small">
+                  ENVOYER
+                </Button>
+              </div>
+            </form>
+
+            {/* Section de la roue */}
+            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2rem', paddingTop: '3rem' }}>
+              <div
+                ref={wheelRef}
+                style={{
+                  position: "relative",
+                  width: "370px",
+                  height: "370px",
+                }}
+              >
+                {/* Points lumineux clignotants */}
+                {Array.from({ length: numberOfLights }).map((_, i) => {
+                  const angle = (i * 360) / numberOfLights;
+                  const radius = 190;
+                  const x = Math.cos((angle * Math.PI) / 180) * radius;
+                  const y = Math.sin((angle * Math.PI) / 180) * radius;
+                  
+                  return (
+                    <div
+                      key={i}
+                      className="pointer-events-none light-point"
+                      style={{
+                        position: "absolute",
+                        left: "50%",
+                        top: "50%",
+                        width: "12px",
+                        height: "12px",
+                        borderRadius: "50%",
+                        backgroundColor: "rgb(250, 204, 21)",
+                        transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                        animationDelay: `${i * 0.05}s`,
+                      }}
+                    />
+                  );
+                })}
+
+                {/* Image de la roue */}
+                <Image
+                  src="/gambling.png"
+                  alt="Wheel"
+                  width={400}
+                  height={400}
+                  style={{
+                    transition: isSpinning ? "transform 3s cubic-bezier(0.25, 0.1, 0.25, 1)" : "none",
+                    transform: `rotate(${rotation}deg)`,
+                  }}
+                  priority
                 />
-              </label>
-            </div>
 
-            <label className="retroLabel">
-              Message
-              <textarea
-                className="retroTextarea"
-                rows={4}
-                placeholder="Balance toutes tes idées ici 🔥"
-              />
-            </label>
+                {/* Pointeur au-dessus */}
+                <Image
+                  src="/pointer.png"
+                  alt="Pointer"
+                  width={40}
+                  height={40}
+                  style={{
+                    position: "absolute",
+                    top: "10px",
+                    left: "50%",
+                    transform: "translateX(-50%) rotate(180deg)",
+                    zIndex: 10,
+                    pointerEvents: "none",
+                  }}
+                />
+              </div>
 
-            <div className="retroFormActions">
-              <Button type="submit" className="retroButton small">
-                ENVOYER
+              <Button
+                onClick={spinWheel}
+                disabled={isSpinning}
+                className="bg-[var(--softgreen)] hover:bg-[var(--green)] text-[var(--darkgreen)] font-bold py-3 px-8 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              >
+                {isSpinning ? "EN COURS..." : "LANCER LA ROUE"}
               </Button>
+
+              {selectedLetter && !isSpinning && (
+                <div className="text-2xl font-bold text-[var(--lightgreen)] animate-bounce">
+                  Lettre tirée : {selectedLetter}
+                </div>
+              )}
             </div>
-          </form>
+          </div>
         )}
       </main>
     </div>
