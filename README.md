@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/logo.png" alt="Logo du projet" width="160" />
+  <img src="./app/favicon.ico" alt="Logo du projet" width="160" />
 </p>
 
 <h1 align="center">NOSLEEP4US — Projet Next.js Nuit de l'Info 2025 🎮</h1>
