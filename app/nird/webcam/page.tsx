@@ -1,8 +1,9 @@
 import React from 'react';
 import Navbar from '@/components/ui/navbar';
+import LazyIframe from '../LazyIframe';
 
 export const metadata = {
-  title: 'Webcam Audio Visualizer',
+  title: 'Video webcam - Webcam Audio Visualizer',
 };
 
 export default function Page() {
@@ -16,7 +17,6 @@ export default function Page() {
             maxWidth: '1280px',
             margin: '1.5rem',
             height: 'calc(100vh - 4rem - 3rem)',
-            // semi-opaque panel so the animated background still shows
             backgroundColor: 'rgba(255,255,255,0.85)',
             backdropFilter: 'blur(6px)',
             WebkitBackdropFilter: 'blur(6px)',
@@ -25,11 +25,7 @@ export default function Page() {
             boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
           }}
         >
-          <iframe
-            src="/webcam/index.html"
-            title="Webcam Audio Visualizer"
-            style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-          />
+          <LazyIframe src="/webcam/index.html" title="Cliquez pour lancer la vidéo" />
         </div>
       </main>
     </>
