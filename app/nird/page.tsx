@@ -118,14 +118,19 @@ export default function NirdPage() {
               </div>
             </button>
           </div>
-          
-
-
-
           </section>
 
+          
+            <section className="bg-white rounded-xl shadow p-6 space-y-4">
+            <h2 className="text-xl font-semibold">La solution : Linux</h2>
+              <p>
+                Linux est un système d'exploitation open source qui offre une alternative durable et responsable aux systèmes propriétaires. En adoptant Linux, les établissements éducatifs peuvent prolonger la durée de vie de leurs équipements informatiques, réduire les coûts liés aux licences logicielles, et favoriser un environnement numérique plus inclusif et respectueux de la vie privée.
+              </p>
+              <p>
+                Le collectif NIRD propose sa propre distribution Linux, <a href="https://nird.forge.apps.education.fr/linux/" className="text-blue-600 underline">Linux NIRD</a> , spécialement conçue pour répondre aux besoins des écoles et des établissements d'enseignement.
+              </p>
 
-
+          </section>
 
           <section className="bg-white rounded-xl shadow p-6 space-y-4">
             <h2 className="text-xl font-semibold">Ressources et contact</h2>
