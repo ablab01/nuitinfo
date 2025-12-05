@@ -40,9 +40,9 @@
                     // mapping: check last path segment for video1, video2, etc.
                     const seg = parentPath.split('/').filter(Boolean).pop() || '';
                     switch(seg){
-                        case 'video1': audio = 'asset/232941_New.MP3'; break;
+                        case 'video1': audio = 'etat_oblige_jeter_ordinateurs_audio.webm'; break;
                         case 'video2': audio = 'asset/872056_Above-the-clouds.mp3'; break;
-                        default: audio = null;
+                        default: audio = 'asset/232941_New.MP3';
                     }
                 }
                 if(!audio) audio = 'asset/232941_New.MP3';
@@ -51,6 +51,7 @@
         })();
         </script>
         <script src="audio-override.js"></script>
+        <script src="video-override.js"></script>
         <script src="index.js"></script>
 </body>
 

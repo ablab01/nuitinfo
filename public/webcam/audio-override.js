@@ -15,8 +15,8 @@
       try{ parentPath = window.parent && window.parent.location && window.parent.location.pathname || ''; }catch(e){ parentPath = ''; }
       const seg = parentPath.split('/').filter(Boolean).pop() || '';
       switch(seg){
-        case 'video1': audio = 'asset/232941_New.MP3'; break;
-        case 'video2': audio = 'asset/872056_Above-the-clouds.mp3'; break;
+        case 'video1': audio = 'asset/etat_oblige_jeter_ordinateurs_audio.webm'; break;
+        case 'video2': audio = 'asset/ordi_obsolete_audio.webm'; break;
         default: audio = null;
       }
     }
@@ -47,11 +47,11 @@
         try{
           let req = input;
           if(typeof input === 'string'){
-            if(input.indexOf('232941_New.MP3') !== -1 || input.indexOf('872056_Above-the-clouds.mp3') !== -1){
+            if(input.indexOf('asset/etat_oblige_jeter_ordinateurs_audio.webm') !== -1 || input.indexOf('asset/ordi_obsolete_audio.webm') !== -1){
               req = window.__WEBCAM_AUDIO || input;
             }
           } else if(input && input.url){
-            if(input.url.indexOf('232941_New.MP3') !== -1 || input.url.indexOf('872056_Above-the-clouds.mp3') !== -1){
+            if(input.url.indexOf('asset/etat_oblige_jeter_ordinateurs_audio.webm') !== -1 || input.url.indexOf('asset/ordi_obsolete_audio.webm') !== -1){
               req = (new Request(window.__WEBCAM_AUDIO || input.url, input));
             }
           }
