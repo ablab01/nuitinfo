@@ -136,7 +136,16 @@ Fonctionnalités visuelles :
 - Dark mode supporté
 
 ---
+## 🎮 Easter egg
 
+Un easter egg est intégré dans le projet :
+
+👉 **Easter egg :**  
+En cliquant sur le **logo en haut du site**, vous êtes redirigé vers une page spéciale contenant un flux caméra et audio.
+
+Ce contenu a été réalisé à partir d’un défi de projet effectué lors du module d’informatique, explorant l’utilisation des flux multimédia (vidéo et audio) en temps réel.
+
+---
 ## 🧪 Dépannage
 
 ### Le projet ne démarre pas ?
