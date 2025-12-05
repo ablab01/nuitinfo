@@ -164,6 +164,12 @@ Ce contenu a été réalisé à partir d’un défi de projet effectué lors du 
 Équipe NOSLEEP4US :
 BEKKALI Abla - PAGNON Alexis - PHILIPPE Corentin - SANCHEZ Adam
 
+Ressources utilisées :
+- Musique : "Title Wave" by Sike991
+- Video 1 : "Logiciel obsolète : l'État obligé de jeter des milliers d'ordinateurs ?" (https://www.youtube.com/watch?v=76T8oubek-c)
+- Video 2 : "L'Ordinateur Obsolète" (https://www.youtube.com/watch?v=S6GLqkhykmA)
+- Github Audio Visualizer : https://github.com/r21nomi/webcam-audio-visualizer 
+
 ---
 
 ## 📜 Licence
