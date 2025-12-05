@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 .contactText {
-  font-family: 'Courier New', monospace;
-  color: var(--lightgreen);
-  font-size: 1rem;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  color: #d6ff95;
+  font-size: 0.7rem;
   line-height: 1.8;
-  letter-spacing: 0.08em;
+  letter-spacing: 2px;
+  text-shadow: 
+    2px 2px 0 var(--green),
+    4px 4px 0 var(--darkgreen),
+    0 0 10px rgba(192, 222, 123, 0.6);
   max-width: 550px;
   margin: 0 auto;
 
@@ -125,7 +129,12 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  font-family: 'Courier New', monospace;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 
+    2px 2px 0 var(--green),
+    4px 4px 0 var(--darkgreen),
+    0 0 10px rgba(192, 222, 123, 0.6);
 }
 
 .contactInfoItem {
@@ -139,7 +148,7 @@
 }
 
 .contactInfoLabel {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 3px;
   color: var(--softgreen);
@@ -150,7 +159,7 @@
 }
 
 .contactInfoValue {
-  font-size: 1rem;
+  font-size: 0.7rem;
   text-decoration: none;
   color: var(--lightgreen);
   font-weight: 600;
@@ -179,7 +188,7 @@
 }
 
 .teamList li {
-  font-size: 0.95rem;
+  font-size: 0.7rem;
   color: var(--lightgreen);
   text-shadow: 1px 1px 0 rgba(5, 66, 4, 0.6);
 }
@@ -228,8 +237,13 @@
   box-shadow:
     0 0 0 2px rgba(5, 66, 4, 0.7),
     10px 10px 0 rgba(5, 66, 4, 0.9);
-  font-family: 'Courier New', monospace;
-  color: var(--lightgreen);
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  color: #d6ff95;
+  letter-spacing: 2px;
+  text-shadow: 
+    2px 2px 0 var(--green),
+    4px 4px 0 var(--darkgreen),
+    0 0 10px rgba(192, 222, 123, 0.6);
   max-width: 750px;
   margin-left: auto;
   margin-right: auto;
@@ -237,7 +251,7 @@
 
 .retroFormTitle {
   font-family: 'Press Start 2P', Arial, sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   margin-bottom: 1.5rem;
   text-align: center;
   color: #d6ff95;
@@ -273,10 +287,15 @@
 .retroTextarea {
   background: #021402;
   border: 1px solid rgba(192, 222, 123, 0.6);
-  color: var(--lightgreen);
+  color: #d6ff95;
   padding: 0.6rem 0.7rem;
-  font-size: 0.9rem;
-  font-family: 'Courier New', monospace;
+  font-size: 0.65rem;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  letter-spacing: 2px;
+  text-shadow: 
+    2px 2px 0 var(--green),
+    4px 4px 0 var(--darkgreen),
+    0 0 10px rgba(192, 222, 123, 0.6);
   border-radius: 10px;
   outline: none;
 }

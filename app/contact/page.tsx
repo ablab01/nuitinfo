@@ -153,14 +153,14 @@ export default function Contact() {
             </div>
 
             <div className="contactInfoItem">
-              <span className="contactInfoLabel">Téléphone</span>
+              <span className="contactInfoLabel">Telephone</span>
               <a href="tel:+33123456789" className="contactInfoValue">
                 +33 1 23 45 67 89
               </a>
             </div>
 
             <div className="contactInfoItem">
-              <span className="contactInfoLabel">Équipe</span>
+              <span className="contactInfoLabel">Equipe</span>
               <ul className="teamList">
                 <li>BEKKALI Abla - PAGNON Alexis - PHILIPPE Corentin - SANCHEZ Adam</li>
               </ul>
@@ -216,7 +216,7 @@ export default function Contact() {
                   <input
                     type="text"
                     className="retroInput"
-                    placeholder="Ton pseudo / ton nom"
+                    placeholder="Ton nom"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
@@ -341,12 +341,28 @@ export default function Contact() {
                 onClick={spinWheel}
                 disabled={isSpinning}
                 className="bg-[var(--softgreen)] hover:bg-[var(--green)] text-[var(--darkgreen)] font-bold py-3 px-8 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                style={{ 
+                  fontFamily: "'Press Start 2P', Arial, sans-serif",
+                  fontSize: '0.7rem',
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase'
+                }}
               >
                 {isSpinning ? "EN COURS..." : "LANCER LA ROUE"}
               </Button>
 
               {selectedLetter && !isSpinning && (
-                <div className="text-2xl font-bold text-[var(--lightgreen)] animate-bounce">
+                <div 
+                  className="animate-bounce"
+                  style={{
+                    fontFamily: "'Press Start 2P', Arial, sans-serif",
+                    fontSize: '0.8rem',
+                    fontWeight: 'bold',
+                    color: '#d6ff95',
+                    letterSpacing: '2px',
+                    textShadow: '2px 2px 0 var(--green), 4px 4px 0 var(--darkgreen), 0 0 10px rgba(192, 222, 123, 0.6)'
+                  }}
+                >
                   Lettre tirée : {selectedLetter}
                 </div>
               )}
