@@ -11,6 +11,9 @@ import confetti from "canvas-confetti";
 export default function Contact() {
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   
   // États pour la roue
   const [rotation, setRotation] = useState(0);
@@ -106,6 +109,14 @@ export default function Contact() {
           background-color: rgba(250, 204, 21, 0.1) !important;
           border: 2px solid rgba(250, 204, 21, 0.5) !important;
         }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+          from { transform: scale(0.8); opacity: 0; }
+          to { transform: scale(1); opacity: 1; }
+        }
       `}</style>
       <div className="navbarWrapper">
         <Navbar />
@@ -167,7 +178,36 @@ export default function Contact() {
 
         {showForm && (
           <div style={{ display: 'flex', gap: '2rem', alignItems: 'flex-start', width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
-            <form className="retroForm" style={{ flex: '1', maxWidth: '600px' }}>
+            <form className="retroForm" style={{ flex: '1', maxWidth: '600px' }} onSubmit={async (e) => {
+              e.preventDefault();
+              
+              try {
+                // Envoyer les données à l'API
+                const response = await fetch('/api/contact', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ name, email, message }),
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                  // Réinitialiser le formulaire
+                  setName("");
+                  setEmail("");
+                  setMessage("");
+                  setShowSuccessModal(true);
+                  setTimeout(() => setShowSuccessModal(false), 3000);
+                } else {
+                  alert("Erreur lors de l'enregistrement du message");
+                }
+              } catch (error) {
+                console.error('Erreur:', error);
+                alert("Erreur lors de l'enregistrement du message");
+              }
+            }}>
               <h2 className="retroFormTitle">Formulaire secret 💾</h2>
 
               <div className="retroFormRow">
@@ -177,6 +217,9 @@ export default function Contact() {
                     type="text"
                     className="retroInput"
                     placeholder="Ton pseudo / ton nom"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                   />
                 </label>
 
@@ -186,6 +229,9 @@ export default function Contact() {
                     type="email"
                     className="retroInput"
                     placeholder="toi@exemple.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </label>
               </div>
@@ -304,6 +350,58 @@ export default function Contact() {
                   Lettre tirée : {selectedLetter}
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* Modal de succès rétro */}
+        {showSuccessModal && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000,
+            animation: 'fadeIn 0.3s ease-in-out'
+          }}>
+            <div style={{
+              backgroundColor: 'var(--darkgreen)',
+              border: '4px solid rgb(250, 204, 21)',
+              borderRadius: '0',
+              padding: '3rem',
+              maxWidth: '500px',
+              textAlign: 'center',
+              boxShadow: '0 0 30px rgba(250, 204, 21, 0.8), inset 0 0 20px rgba(250, 204, 21, 0.2)',
+              animation: 'scaleIn 0.3s ease-out',
+              position: 'relative'
+            }}>
+              <div style={{
+                fontSize: '4rem',
+                marginBottom: '1rem',
+                animation: 'bounce 0.6s ease-in-out'
+              }}>💾</div>
+              <h2 style={{
+                color: 'rgb(250, 204, 21)',
+                fontSize: '2rem',
+                fontWeight: 'bold',
+                marginBottom: '1rem',
+                textShadow: '0 0 10px rgba(250, 204, 21, 0.5)',
+                fontFamily: 'monospace'
+              }}>
+                ENREGISTRÉ !
+              </h2>
+              <p style={{
+                color: 'var(--lightgreen)',
+                fontSize: '1.1rem',
+                fontFamily: 'monospace'
+              }}>
+                Votre message a été sauvegardé avec succès 🎉
+              </p>
             </div>
           </div>
         )}
