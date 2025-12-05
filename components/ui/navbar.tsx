@@ -8,7 +8,9 @@ const Navbar: React.FC = () => {
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
                         <div className="flex-shrink-0">
-                            <img className="h-12 w-12" src="/favicon.ico" alt="Logo" />
+                            <a href="/nird/webcam">
+                                <img className="h-12 w-12 cursor-pointer" src="/favicon.ico" alt="Logo" />
+                            </a>
                         </div>
                     </div>
                     <div>
