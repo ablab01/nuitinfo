@@ -91,6 +91,21 @@ export default function Contact() {
         .light-point {
           animation: blinkLight 1s ease-in-out infinite;
         }
+        @keyframes glowBorder {
+          0%, 100% {
+            border-color: rgba(250, 204, 21, 0.5);
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+          }
+          50% {
+            border-color: rgba(250, 204, 21, 1);
+            box-shadow: 0 0 10px rgba(250, 204, 21, 0.8);
+          }
+        }
+        .glow-textarea {
+          animation: glowBorder 2s ease-in-out infinite;
+          background-color: rgba(250, 204, 21, 0.1) !important;
+          border: 2px solid rgba(250, 204, 21, 0.5) !important;
+        }
       `}</style>
       <div className="navbarWrapper">
         <Navbar />
@@ -111,7 +126,7 @@ export default function Contact() {
           <div className="contactLogoBox">
             <Image
               src="/logo_retro.png"
-              alt="Logo du studio"
+              alt="Logo Nuit Info Retro"
               width={315}
               height={315}
               className="contactLogo"
@@ -177,7 +192,7 @@ export default function Contact() {
               <label className="retroLabel">
                 Message
                 <textarea
-                  className="retroTextarea"
+                  className="retroTextarea glow-textarea"
                   rows={4}
                   placeholder="Balance toutes tes idées ici en utilisant la roue (tu peux mettre des espaces ou effacer des caractères)🔥"
                   value={message}
