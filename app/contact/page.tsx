@@ -239,7 +239,7 @@ export default function Contact() {
                 Message
                 <textarea
                   className="retroTextarea glow-textarea"
-                  rows={4}
+                  rows={8}
                   placeholder="Balance toutes tes idées ici en utilisant la roue (tu peux mettre des espaces ou effacer des caractères)🔥"
                   value={message}
                   onChange={(e) => {
