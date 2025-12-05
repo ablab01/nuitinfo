@@ -15,7 +15,6 @@ const Navbar: React.FC = () => {
                         <div className="ml-4 flex items-center space-x-4">
                             <a href="/presentation" className="text-[var(--lightgreen)] hover:bg-[var(--softgreen)] rounded-lg p-2 transition-colors">Présentation</a>
                             <a href="/nird" className="text-[var(--lightgreen)] hover:bg-[var(--softgreen)] rounded-lg p-2 transition-colors">NIRD</a>
-                            <a href="/tableau-de-bord" className="text-[var(--lightgreen)] hover:bg-[var(--softgreen)] rounded-lg p-2 transition-colors">Tableau de bord</a>
                             <a href="/contact" className="text-[var(--lightgreen)] hover:bg-[var(--softgreen)] rounded-lg p-2 transition-colors">Contact</a>
                         </div>
                     </div>
