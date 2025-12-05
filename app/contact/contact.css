@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.contactText {
+  font-family: 'Courier New', monospace;
+  color: var(--lightgreen);
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  max-width: 550px;
+  margin: 0 auto;
+
+  text-shadow:
+    1px 1px 0 #136813,
+    2px 2px 4px rgba(17, 50, 18, 0.6);
+}
+
+.contactContainer {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+
+.retroGridBackground {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+
+  opacity: 0.9;
+  filter:
+    contrast(230%)
+    brightness(1.2)
+    saturate(140%);
+
+  mix-blend-mode: screen;
+}
+
+.navbarWrapper {
+  position: relative;
+  z-index: 50;
+}
+
+/* Bloc principal */
+.contactContent {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 6rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Titre + texte intro */
+.contactHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.contactTitle {
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  color: #d6ff95;
+
+  text-shadow: 
+    2px 2px 0 var(--green),
+    4px 4px 0 var(--darkgreen),
+    0 0 10px rgba(192, 222, 123, 0.6);
+
+  letter-spacing: 3px;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  background: rgba(2, 20, 2, 0.35);
+  padding: 1rem 2rem;
+  border-radius: 14px;
+}
+
+.contactText {
+  font-family: 'Courier New', monospace;
+  color: var(--lightgreen);
+  font-size: 1rem;
+  line-height: 1.8;
+  letter-spacing: 0.08em;
+  max-width: 550px;
+  margin: 0 auto;
+
+  text-shadow:
+    1px 1px 0 #136813,
+    2px 2px 4px rgba(17, 50, 18, 0.6);
+}
+
+/* Layout logo + infos */
+.contactLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+/* Logo à gauche */
+.contactLogoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 2rem;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(192, 222, 123, 0.4);
+  box-shadow:
+    0 0 0 2px rgba(5, 66, 4, 0.6),
+    8px 8px 0 rgba(5, 66, 4, 0.9);
+}
+
+.contactLogo {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Infos à droite */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  font-family: 'Courier New', monospace;
+}
+
+.contactInfoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem 1.8rem;
+  border-radius: 12px;
+  background: rgba(2, 20, 2, 0.4);
+  border: 2px solid rgba(192, 222, 123, 0.5);
+}
+
+.contactInfoLabel {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--softgreen);
+  font-weight: 700;
+  text-shadow: 
+    2px 2px 0 var(--darkgreen),
+    4px 4px 0 rgba(5, 66, 4, 0.6);
+}
+
+.contactInfoValue {
+  font-size: 1rem;
+  text-decoration: none;
+  color: var(--lightgreen);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  word-break: break-all;
+  text-shadow:
+    1px 1px 0 var(--green),
+    2px 2px 0 rgba(5, 66, 4, 0.5);
+}
+
+.contactInfoValue:hover {
+  color: #d8f58d;
+  text-decoration: underline;
+  text-shadow: 0 0 8px rgba(192, 222, 123, 0.8);
+}
+
+.teamList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--green);
+  font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.teamList li {
+  font-size: 0.95rem;
+  color: var(--lightgreen);
+  text-shadow: 1px 1px 0 rgba(5, 66, 4, 0.6);
+}
+
+
+.retroButton {
+  margin-top: 1.5rem;
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  background: var(--lightgreen);
+  color: #021402;
+  border-radius: 999px;
+  padding: 0.9rem 1.8rem;
+  border: 2px solid var(--green);
+  box-shadow:
+    0 0 0 2px #021402,
+    4px 4px 0 #021402;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retroButton:hover {
+  background: #d8f58d;
+  transform: translate(-2px, -2px);
+  box-shadow:
+    0 0 0 2px #021402,
+    6px 6px 0 #021402;
+}
+
+.retroButton.small {
+  margin-top: 0;
+  padding: 0.75rem 1.4rem;
+}
+
+
+.retroForm {
+  margin-top: 3rem;
+  padding: 2rem 1.8rem;
+  border-radius: 24px;
+  background: rgba(0, 0, 0, 0.75);
+  border: 2px solid rgba(192, 222, 123, 0.5);
+  box-shadow:
+    0 0 0 2px rgba(5, 66, 4, 0.7),
+    10px 10px 0 rgba(5, 66, 4, 0.9);
+  font-family: 'Courier New', monospace;
+  color: var(--lightgreen);
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.retroFormTitle {
+  font-family: 'Press Start 2P', Arial, sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #d6ff95;
+  text-shadow: 
+    2px 2px 0 var(--green),
+    4px 4px 0 var(--darkgreen),
+    0 0 10px rgba(192, 222, 123, 0.6);
+  letter-spacing: 2px;
+}
+
+.retroFormRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.retroLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--softgreen);
+  font-weight: 700;
+  text-shadow: 
+    1px 1px 0 var(--darkgreen),
+    2px 2px 0 rgba(5, 66, 4, 0.5);
+}
+
+.retroInput,
+.retroTextarea {
+  background: #021402;
+  border: 1px solid rgba(192, 222, 123, 0.6);
+  color: var(--lightgreen);
+  padding: 0.6rem 0.7rem;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+  border-radius: 10px;
+  outline: none;
+}
+
+.retroInput::placeholder,
+.retroTextarea::placeholder {
+  color: rgba(192, 222, 123, 0.7);
+}
+
+.retroInput:focus,
+.retroTextarea:focus {
+  border-color: var(--lightgreen);
+  box-shadow: 0 0 0 1px var(--lightgreen);
+}
+
+.retroTextarea {
+  resize: vertical;
+}
+
+.retroFormActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contactLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .contactLogoBox {
+    order: -1;
+  }
+
+  .contactTitle {
+    font-size: 2.2rem;
+  }
+
+  .retroFormRow {
+    grid-template-columns: 1fr;
+  }
+
+  .contactInfo {
+    gap: 1.5rem;
+  }
+}
+
+
+@keyframes arcadeShift {
+  0% {
+    background-position:
+      0 0,
+      0 0,
+      0% 0%,
+      100% 0%,
+      0% 100%,
+      100% 100%;
+  }
+  50% {
+    background-position:
+      15px 15px,
+      -15px -15px,
+      8% 12%,
+      88% 8%,
+      12% 92%,
+      88% 82%;
+  }
+  100% {
+    background-position:
+      30px 0,
+      0 30px,
+      12% 18%,
+      92% 12%,
+      18% 100%,
+      88% 78%;
+  }
+}
