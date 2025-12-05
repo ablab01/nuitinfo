@@ -147,8 +147,8 @@ export default function Contact() {
           <div className="contactInfo">
             <div className="contactInfoItem">
               <span className="contactInfoLabel">Email</span>
-              <a href="mailto:nosleep4us@nuitinfo.com" className="contactInfoValue">
-                contact@tonsite.com
+              <a href="mailto:alexis.pagnon@uphf.fr" className="contactInfoValue">
+                alexis.pagnon@uphf.fr
               </a>
             </div>
 
