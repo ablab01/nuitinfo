@@ -60,6 +60,3 @@ yarn-debug.log*
 # VSCode
 .vscode/
 .history/
-
-# Data files (contacts form submissions)
-/data/contacts.txt
