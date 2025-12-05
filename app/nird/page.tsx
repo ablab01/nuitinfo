@@ -63,7 +63,7 @@ export default function NirdPage() {
             {!isEnabled && (
               <div className="flex justify-center">
                 <a
-                  href="/nird/video1"
+                  href="/nird/video1normal"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
@@ -92,7 +92,7 @@ export default function NirdPage() {
             {!isEnabled && (
               <div className="flex justify-center">
                 <a
-                  href="/nird/video2"
+                  href="/nird/video2normal"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
