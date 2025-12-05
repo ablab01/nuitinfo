@@ -24,53 +24,8 @@
             <div id="message" class="hidden">Please allow camera access.</div>
         </div>
     </main>
-        <script>
-        // Select audio for the demo. Priority: ?track=filename param, else parent page path mapping, else default.
-        (function(){
-            try{
-                const params = new URLSearchParams(window.location.search);
-                let audio = null;
-                const param = params.get('track');
-                if(param){
-                    audio = param.indexOf('/') === -1 ? ('asset/' + param) : param;
-                } else {
-                    // Try to read parent path (works when demo is in an iframe on same-origin)
-                    let parentPath = '';
-                    try{ parentPath = window.parent && window.parent.location && window.parent.location.pathname || ''; }catch(e){ parentPath = ''; }
-                    // mapping: check last path segment for video1, video2, etc.
-                    const seg = parentPath.split('/').filter(Boolean).pop() || '';
-                    switch(seg){
-                        case 'video1': audio = 'etat_oblige_jeter_ordinateurs_audio.webm'; break;
-                        case 'video2': audio = 'asset/872056_Above-the-clouds.mp3'; break;
-                        default: audio = 'asset/232941_New.MP3';
-                    }
-                }
-                if(!audio) audio = 'asset/232941_New.MP3';
-                window.__WEBCAM_AUDIO = audio;
-            }catch(e){ window.__WEBCAM_AUDIO = 'asset/232941_New.MP3'; }
-        })();
-        </script>
         <script src="audio-override.js"></script>
         <script src="video-override.js"></script>
-        <script>
-        // Show a helpful message if the demo didn't start after a short timeout
-        (function(){
-            try{
-                const v = document.getElementById('video');
-                setTimeout(()=>{
-                    try{
-                        const playing = v && ((v.srcObject && v.srcObject.getTracks && v.srcObject.getTracks().length>0) || (v.readyState && v.readyState>=3) || (!v.paused && v.currentTime>0));
-                        if(!playing){
-                            const m = document.getElementById('message');
-                            if(m){ m.classList.remove('hidden'); m.textContent = 'Demo could not start. Check console for errors or allow camera access.'; }
-                            try{ console.warn('[webcam-index] demo did not start (no video stream)'); }catch(e){}
-                            try{ if(window.parent && window.parent !== window) window.parent.postMessage({source:'webcam-index', level:'warn', message:'demo did not start (no video stream)'}, '*'); }catch(e){}
-                        }
-                    }catch(e){ try{ console.error('[webcam-index] status check error', e); }catch(e){} }
-                }, 4500);
-            }catch(e){}
-        })();
-        </script>
         <script src="index.js"></script>
 </body>
 
