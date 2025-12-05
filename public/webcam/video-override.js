@@ -25,6 +25,8 @@
     if(!videoParam) return;
     const videoPath = (videoParam.indexOf('/')===-1) ? ('/webcam/asset/' + videoParam) : videoParam;
     window.__WEBCAM_VIDEO = videoPath;
+    function _postParent(level, msg, meta){ try{ if(window.parent && window.parent !== window) window.parent.postMessage({source:'video-override', level:level, message:String(msg), meta:meta||null}, '*'); }catch(e){} }
+    try{ console.debug('[video-override] using video:', videoPath); _postParent('debug','using video:'+videoPath); }catch(e){}
 
     const srcVideo = document.createElement('video');
     srcVideo.src = videoPath;
@@ -39,14 +41,21 @@
     (document.body || document.documentElement).appendChild(srcVideo);
 
     let resolveStream, rejectStream;
-    const videoStreamPromise = new Promise((res, rej) => { resolveStream = res; rejectStream = rej; });
+    // Provide a short timeout so we don't hang forever waiting for captureStream
+    let _streamTimeout = null;
+    const videoStreamPromise = new Promise((res, rej) => {
+      resolveStream = function(s){ try{ if(_streamTimeout) clearTimeout(_streamTimeout); }catch(e){}; res(s); };
+      rejectStream = function(err){ try{ if(_streamTimeout) clearTimeout(_streamTimeout); }catch(e){}; rej(err); };
+    });
+    // If capture doesn't succeed quickly, reject and allow fallback
+    _streamTimeout = setTimeout(()=>{ try{ rejectStream(new Error('capture timeout')); }catch(e){} }, 3000);
 
     function tryCapture(){
       try{
         const fn = srcVideo.captureStream || srcVideo.mozCaptureStream;
         if(typeof fn === 'function'){
           const s = fn.call(srcVideo);
-          if(s && s.getTracks && s.getTracks().length){ resolveStream(s); return true; }
+          if(s && s.getTracks && s.getTracks().length){ try{ console.debug('[video-override] captureStream provided', s.getTracks().length, 'tracks'); _postParent('debug','captureStream provided', {tracks:s.getTracks().length}); }catch(e){}; resolveStream(s); return true; }
         }
       }catch(e){}
       return false;
@@ -73,11 +82,16 @@
       srcVideo.addEventListener('canplay', onReady);
       srcVideo.addEventListener('loadeddata', onReady);
       let attempts = 0;
+      const MAX_ATTEMPTS = 60; // ~3s at 50ms interval
       const iv = setInterval(()=>{
         attempts++;
         if(tryCapture()){ clearInterval(iv); srcVideo.removeEventListener('canplay', onReady); srcVideo.removeEventListener('loadeddata', onReady); return; }
-        if(attempts>200){ clearInterval(iv); srcVideo.removeEventListener('canplay', onReady); srcVideo.removeEventListener('loadeddata', onReady); try{ rejectStream(new Error('capture failed')); }catch(e){} }
+        if(attempts>MAX_ATTEMPTS){ clearInterval(iv); srcVideo.removeEventListener('canplay', onReady); srcVideo.removeEventListener('loadeddata', onReady); try{ console.warn('[video-override] capture failed after attempts, rejecting'); _postParent('warn','capture failed after attempts'); }catch(e){}; try{ rejectStream(new Error('capture failed')); }catch(e){} }
       },50);
+      // If the video element plays but capture didn't work, log that too
+      setTimeout(()=>{
+        try{ if(srcVideo && !srcVideo.paused && srcVideo.currentTime>0){ console.debug('[video-override] video playing but capture unsupported'); } }catch(e){}
+      }, 1000);
     })();
 
   }catch(e){ /* ignore errors */ }

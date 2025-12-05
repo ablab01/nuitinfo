@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '@/components/ui/navbar';
+import LazyIframe from '../LazyIframe';
 
 export const metadata = {
   title: 'Video 1 - Webcam Audio Visualizer',
@@ -24,11 +25,7 @@ export default function Page() {
             boxShadow: '0 8px 24px rgba(0,0,0,0.15)'
           }}
         >
-          <iframe
-            src="/webcam/index.html"
-            title="Webcam Audio Visualizer - Video 1"
-            style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-          />
+          <LazyIframe src="/webcam/index.html" title="Cliquez pour lancer la vidéo" />
         </div>
       </main>
     </>
